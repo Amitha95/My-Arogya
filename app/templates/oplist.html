@@ -1,0 +1,57 @@
+{% extends "staff.html" %}
+{% load static %}
+{% block content %}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="row  p-3">	
+    <!-- tables -->
+    
+     <!-- <div class="agile-tables">-->
+     <div class="col-md-12 bg-info">
+          <h2 class="text-primary">Manage Staff</h2>
+            <table id="table table-responsive table-striped " width="100%" style="margin-bottom:10px;">
+          <thead class="bg-primary text-white">
+       <tr >
+                            <th style="  color:white;">Sl.No.</th>
+                            <th style="  color:white;" >OP date</th>
+                            <th style="  color:white;" >OP Number</th>
+                            <th style="  color:white;" >OP Type</th>
+                            
+                          </tr>
+                          </thead>
+        
+        <tbody>
+           
+            {% for datas in data %}
+                                
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                
+                                <td>{{datas.op_date}}</td>
+                                <td>{{datas.op_no}}</td>
+                                <td>{{datas.op_type}}</td>
+                                
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+      </div>
+     <!---    </div>-->
+        
+            </div>
+            <style>
+                table th, table td {
+                padding: 9px 7px;
+                text-align: left;
+                }
+                table th
+                {
+                    color:white;
+                }
+                </style>
+
+
+{% endblock %}

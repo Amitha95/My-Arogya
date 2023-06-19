@@ -1,0 +1,22 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+  <h2>Edit Room</h2>
+  <form method="POST" action="{% url 'edit_room' room_id=room_id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="room_number">Room Number:</label>
+      <input type="text" class="form-control" id="room_number" name="room_number" value="{{ room.room_number }}">
+    </div>
+    <div class="form-group">
+      <label for="floor">Floor:</label>
+      <input type="text" class="form-control" id="floor" name="floor" value="{{ room.floor }}">
+    </div>
+    <div class="form-group">
+      <label for="capacity">Capacity:</label>
+      <input type="number" class="form-control" id="capacity" name="capacity" value="{{ room.capacity }}">
+    </div>
+    <!-- Add other room fields here -->
+    <button type="submit" class="btn btn-primary">Update Room</button>
+  </form>
+{% endblock %}

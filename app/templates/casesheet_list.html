@@ -1,0 +1,69 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+  <h2>Case Sheets</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Case Sheet ID</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Symptoms</th>
+        <th>Diagnosis</th>
+        <th>Treatment</th>
+        <th>Status</th>
+        <th>Admit</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for casesheet in casesheets %}
+        <tr>
+          <td>{{ casesheet.casesheet_id }}</td>
+          <td>{{ casesheet.patient }}</td>
+          <td>{{ casesheet.doctor.Staff_name }}</td>
+          <td>{{ casesheet.date }}</td>
+          <td>{{ casesheet.symptoms }}</td>
+          <td>{{ casesheet.diagnosis }}</td>
+          <td>{{ casesheet.treatment }}</td>
+          <td>{{ casesheet.status }}</td>
+          <td>
+            {% if casesheet.admit %}
+              Admitted
+            {% else %}
+              Not Admitted
+            {% endif %}
+          </td>
+          <td>
+            {% if casesheet.admit %}
+              {% if casesheet.room %}
+                Room: {{ casesheet.room }}
+              {% else %}
+                <a href="{% url 'allot_room' casesheet_id=casesheet.casesheet_id %}" class="btn btn-primary">Allot Room</a>
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+{% endblock %}
+

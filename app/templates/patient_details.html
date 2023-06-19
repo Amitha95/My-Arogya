@@ -1,0 +1,30 @@
+{% extends "admin.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Patient List</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Patient ID</th>
+      <th>Patient Name</th>
+      <th>Room Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for patient in patients %}
+    <tr>
+      <td>{{ patient.patient_id }}</td>
+      <td>{{ patient.patient_name }}</td>
+      <td>
+        {% if patient.room %}
+          {{ patient.room.room_number }}
+        {% else %}
+          N/A
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "admin.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Appointment Details</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Appointment Number</th>
+      <th>User</th>
+      <th>Doctor</th>
+      <th>Department</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for appointment in appointments %}
+    <tr>
+      <td>{{ appointment.op_no }}</td>
+      <td>{{ appointment.User.User_name }}</td>
+      <td>{{ appointment.Staff.Staff_name }}</td>
+      <td>{{ appointment.department.department_name }}</td>
+      <td>{{ appointment.op_date }}</td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="actionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu" aria-labelledby="actionDropdown">
+            <a class="dropdown-item" href="{% url 'accept_appointment' appointment.op_id %}">Accept</a><br>
+            <a class="dropdown-item" href="{% url 'reject_appointment' appointment.op_id %}">Reject</a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

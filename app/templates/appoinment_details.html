@@ -1,0 +1,36 @@
+{% extends "userhome.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Appointment Details</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Appointment Number</th>
+      <th>Doctor</th>
+      <th>Department</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for appointment in appointments %}
+    <tr>
+      <td>{{ appointment.op_no }}</td>
+      <td>{{ appointment.Staff.Staff_name }}</td>
+      <td>{{ appointment.department.department_name }}</td>
+      <td>{{ appointment.op_date }}</td>
+      <td>
+        {% if appointment.op_status == "Accepted" %}
+          Accepted
+        {% elif appointment.op_status == "Rejected" %}
+          Doctor not available
+        {% else %}
+          Pending
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

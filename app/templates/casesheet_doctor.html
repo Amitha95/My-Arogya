@@ -1,0 +1,49 @@
+{% extends "staffhome.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Added Case Sheets</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Case Sheet ID</th>
+      <th>Patient</th>
+      <th>Doctor</th>
+      <th>Date</th>
+      <th>Symptoms</th>
+      <th>Diagnosis</th>
+      <th>Treatment</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for casesheet in casesheets %}
+    <tr>
+      <td>{{ casesheet.casesheet_id }}</td>
+      <td>{{ casesheet.patient }}</td>
+      <td>{{ casesheet.doctor.Staff_name }}</td>
+      <td>{{ casesheet.date }}</td>
+      <td>{{ casesheet.symptoms }}</td>
+      <td>{{ casesheet.diagnosis }}</td>
+      <td>{{ casesheet.treatment }}</td>
+      <td>
+        {% if casesheet.admit %}
+          Admitted
+        {% else %}
+          Not Admitted
+        {% endif %}
+      </td>
+      <td>
+        {% if casesheet.admit %}
+          <!-- Display prescription details or any other actions for admitted casesheets -->
+          <!-- Add the appropriate code here -->
+        {% else %}
+          <a href="{% url 'prescribe_medicine' casesheet_id=casesheet.casesheet_id %}" class="btn btn-primary">Prescribe Medicine</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

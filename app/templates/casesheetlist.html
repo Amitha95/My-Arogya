@@ -1,0 +1,75 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<!--grid-->
+<div class="row">
+<div class="col-md-12 bg-info">
+ <h3 class="text-primary">Op History</h3>
+ <div class="col-md-1"></div>
+ <div class="col-md-10">
+
+    <table id="table table-responsive table-striped " width="100%" style="margin-bottom:10px;">
+     
+                         
+                        
+                         
+                         
+                        
+                         
+                          
+                        
+                      
+                      
+                   
+         
+        
+                              
+                              <tr>
+                             
+                                <th  >Patient Details</th>
+                              <td><b>Name:-</b> {{ data.User.User_name }}<br/>
+                                <b>address:-</b> {{ data.User.User_address }}<br/>
+                                <b>phone:- </b>{{ data.User.User_phone }},
+                                {{ data.User.User_alt_No }}
+                            </td>
+                        </tr><tr>
+                            <th  >Op</th>
+                              <td>{{ data.op.op_type }}</td>
+                            </tr><tr>
+                                <th  >Booking date</th>
+                              <td>{{ data.op.op_date }}</td>
+                            </tr><tr>
+                                
+                          <th  >Op No</th>
+                              <td>{{ data.op.op_no }}</td>
+                            </tr><tr>
+                                <th  >Report</th>
+                              <td>{{ data.record_detail}}</td>
+                              </tr>
+                            
+                            </tbody>
+                        </table>             
+
+
+</div>
+</div>
+
+</div>
+<style>
+    table th, table td {
+    padding: 9px 7px;
+    text-align: left;
+    }
+    table th
+    {
+        color:white;
+    }
+    </style>
+
+{% endblock %}
+

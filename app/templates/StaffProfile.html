@@ -1,0 +1,86 @@
+{% extends "staff.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<!--grid-->
+<div class="row">
+<div class="col-md-12 bg-info">
+ <h3 class="text-primary">Profile</h3>
+ <div class="col-md-1"></div>
+ <div class="col-md-10">
+            
+                <form class="form-horizontal" method="post" action="{% url 'Profile' %}" enctype="multipart/form-data">
+                
+                    {% csrf_token %}
+                 
+
+                    <div class="form-group">
+                        <label for="focusedinput" class="col-sm-2 ">Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" value="{{data.Staff_name}}" readonly name="t1" required id="focusedinput" placeholder="Staff Name">
+                        </div>
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="txtarea1" class="col-sm-2 ">Address</label>
+                        <div class="col-sm-8"><textarea name="t2" id="txtarea1" required cols="50" rows="4" class="form-control"placeholder="Staff Address">{{data.Staff_address}}</textarea></div>
+                    </div>
+                    <div class="form-group">
+                <label class="col-md-2 ">Email Address</label>
+                <div class="col-md-8">
+                    <div class="input-group">							
+                        <span class="input-group-addon">
+                            <i class="fa fa-envelope-o"></i>
+                        </span>
+                        <input type="text" class="form-control" value="{{data.Staff_email}}" name="t3" required placeholder="Email Address" id="ema" onblur="auemailss();" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                        <label for="mediuminput" class="col-sm-2">Phone No</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" value="{{data.Staff_phone}}" name="t4" id="phn" onblur="auphoness();" required id="mediuminput" placeholder="Phone Number">
+                        </div>
+                    </div>
+                <div class="form-group">
+                        <label for="selector1" class="col-sm-2 ">Designation</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" value="{{data.Staff_designation}}" name="t5" required placeholder="designation" id="ema1" readonly  required>
+                
+
+                         </div>
+                    </div>	
+                    <div class="form-group">
+                        <label for="checkbox" class="col-sm-2 ">Qualification</label>
+                        <div class="col-sm-8">
+                            <div class="checkbox-inline1">
+                                 <input type="text" class="form-control" value="{{data.Staff_qualification}}" name="t6" required placeholder="designation" id="ema2" readonly  required>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                        <label for="txtarea1" class="col-sm-2 " required>Experience</label>
+                        <div class="col-sm-8"><textarea name="t7" readonly id="txtarea1" value="{{data.Staff_experience}}" cols="50" rows="4" class="form-control" placeholder="Experience Details"></textarea></div>
+                    </div>
+
+                    <div class="" style="margin-bottom: 10px;">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <input type="submit" value="Update" class="btn-primary btn"/>
+                            <div class="col-md-1"></div>
+                                <input type="reset" value="Reset" class="btn-warning btn"/>
+                            </div>
+                        </div>
+                    </div>
+        </form>
+</div>
+        </div>
+        
+</div>
+
+
+{% endblock %}

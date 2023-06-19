@@ -1,0 +1,17 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+  <h2>Allot Room for {{ casesheet.patient }}</h2>
+  <form method="POST" action="{% url 'allot_room' casesheet_id=casesheet.casesheet_id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="room_id">Select Room:</label>
+      <select name="room_id" id="room_id" class="form-control">
+        {% for room in rooms %}
+          <option value="{{ room.pk }}">{{ room }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Allot Room</button>
+  </form>
+{% endblock %}

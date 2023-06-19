@@ -1,0 +1,71 @@
+{% extends "staff.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<!--grid-->
+<div class="row">
+<div class="col-md-12 bg-info">
+ <h3 class="text-primary">Op History</h3>
+ <div class="col-md-1"></div>
+ <div class="col-md-10">
+
+    <table id="table table-responsive table-striped " width="100%" style="margin-bottom:10px;">
+        <thead class="bg-primary text-white" style="background-color: 337ab7;">
+     <tr >
+                          <th >Sl.No.</th>
+                        
+                          <th  >Patient Details</th>
+                          <th  >Op</th>
+                          <th  >Booking date</th>
+                          <th  >Op No</th>
+                          <th  >Report</th>
+                          
+                        
+                      
+                      
+                        </tr>
+                        </thead>
+      
+      <tbody>
+         
+          {% for datas in data %}
+                              
+                              <tr>
+                              <td>{{ forloop.counter }}</td>
+                              
+                              <td><b>Name:-</b> {{ datas.User.User_name }}<br/>
+                                <b>address:-</b> {{ datas.User.User_address }}<br/>
+                                <b>phone:- </b>{{ datas.User.User_phone }},
+                                {{ datas.User.User_alt_No }}
+                            </td>
+                              <td>{{ datas.op.op_type }}</td>
+                              <td>{{ datas.op.op_date }}</td>
+                              <td>{{ datas.op.op_no }}</td>
+                              <td>{{ datas.record_detail}}</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>             
+
+
+</div>
+</div>
+
+</div>
+<style>
+    table th, table td {
+    padding: 9px 7px;
+    text-align: left;
+    }
+    table th
+    {
+        color:white;
+    }
+    </style>
+
+{% endblock %}
+

@@ -1,0 +1,119 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!--grid-->
+<div class="row">
+  <div class="col-md-12 bg-info">
+    <h3 class="text-primary">Register OP</h3>
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'regOp' %}">
+        {% csrf_token %}
+
+        <div class="tab-pane active" id="horizontal-form">
+          <div class="form-group">
+            <label for="nop" class="col-sm-2">OP Number</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="nop" name="nop" value="{{ op_no }}" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="department" class="col-sm-2">Department</label>
+            <div class="col-sm-8">
+              <select class="form-control" id="department" name="department">
+                <option value="">Select Department</option>
+                {% for department in datad %}
+                  <option value="{{ department.department_id }}">{{ department.department_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="date" class="col-sm-2">Date</label>
+            <div class="col-sm-8">
+              <input type="date" class="form-control" id="date" name="t2">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="type" class="col-sm-2">Description</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="type" name="t3" placeholder="">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="doctor" class="col-sm-2">Doctor</label>
+            <div class="col-sm-8">
+              <select class="form-control" id="doctor" name="doctor">
+                <option value="">Select Doctor</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="" style="margin-bottom: 10px;">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" align="center">
+              <button class="btn-success btn" type="submit" name="submit">Appoint</button>
+              <input type="reset" value="Reset" class="btn btn-warning" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#department').change(function() {
+    var departmentId = $(this).val();
+    if (departmentId) {
+      $.ajax({
+        url: '{% url "fetch_doctors" %}',
+        data: { department_id: departmentId },
+        dataType: 'json',
+        success: function(response) {
+          var doctorsSelect = $('#doctor');
+          doctorsSelect.empty();
+          if (response.doctors.length > 0) {
+            $.each(response.doctors, function(index, doctor) {
+              doctorsSelect.append($('<option>', {
+                value: doctor.id,
+                text: doctor.Staff_name
+              }));
+            });
+          } else {
+            doctorsSelect.append($('<option>', {
+              value: '',
+              text: 'No doctors available'
+            }));
+          }
+        }
+      });
+    } else {
+      $('#doctor').empty();
+      $('#doctor').append($('<option>', {
+        value: '',
+        text: 'Select Department First'
+      }));
+    }
+  });
+});
+</script>
+
+<style>
+  table th,
+  table td {
+    padding: 9px 7px;
+    text-align: left;
+  }
+</style>
+
+{% endblock %}

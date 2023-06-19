@@ -1,0 +1,33 @@
+{% extends "Admin.html" %}
+
+{% block content %}
+  <h2>Department List</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Department Name</th>
+        <th>Doctors</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for department in departments %}
+        <tr>
+          <td>{{ department.department_name }}</td>
+          <td>
+            {% if department.doctors.exists %}
+              {% for doctor in department.doctors.all %}
+                {{ doctor.Staff_name }}<br>
+              {% endfor %}
+            {% else %}
+              No doctors assigned
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="2">No departments available</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

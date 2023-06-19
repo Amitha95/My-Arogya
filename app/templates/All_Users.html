@@ -1,0 +1,56 @@
+{% extends "admin.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="row  p-3">	
+    <!-- tables -->
+    
+     <!-- <div class="agile-tables">-->
+     <div class="col-md-12 bg-info">
+          <h2 class="text-primary">Manage Users</h2>
+
+<table class="table table-responsive table-striped " width="100%" style="margin-bottom:10px;">
+    <thead class="bg-primary text-white">
+    <tr class="table-dark">
+        <th style="  color:white;" >Sl.No.</th>
+        <th style="  color:white;">User Name</th>
+        <th style="  color:white;" >User Address</th>
+        <th style="  color:white;" >User Email</th>
+        <th style="  color:white;">User Phone</th>
+        <th style="  color:white;">User Alterntive No.</th>
+        <th style="  color:white;">#</th>
+    </tr>
+    </thead>
+    {% for datas in data %}
+  
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{datas.User_name}}</td>
+        <td>{{datas.User_address}}</td>
+        <td>{{datas.User_email}}</td>
+        <td>{{datas.User_phone}}</td>
+        <td>{{datas.User_alt_No}}</td>
+       
+        <td><a href="{% url 'remove_usr'%}?id={{datas.User_id}}" class="btn btn-danger">Remove</a></td>
+    
+      
+        </tr>
+        {% endfor %}
+        
+</table>
+
+</div>
+<!---    </div>-->
+   
+       </div>
+       <style>
+           table th, table td {
+           padding: 9px 7px;
+           text-align: left;
+           }
+
+           </style>
+{% endblock %}

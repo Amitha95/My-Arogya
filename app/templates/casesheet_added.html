@@ -1,0 +1,15 @@
+{% extends "staffhome.html" %}
+{% load static %}
+
+{% block content %}
+  <h3>Case Sheet Added</h3>
+  <p>Case Sheet ID: {{ casesheet.casesheet_id }}</p>
+  <p>Patient: {{ casesheet.patient }}</p>
+  <p>Doctor: {{ casesheet.doctor.Staff_name }}</p>
+  <p>Date: {{ casesheet.date }}</p>
+  <p>Symptoms: {{ casesheet.symptoms }}</p>
+  <p>Diagnosis: {{ casesheet.diagnosis }}</p>
+  <p>Treatment: {{ casesheet.treatment }}</p>
+  <p>Admit: {% if casesheet.admit %}Yes{% else %}No{% endif %}</p>
+  <p>Status: Added</p>
+{% endblock %}

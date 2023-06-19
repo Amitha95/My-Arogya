@@ -1,0 +1,15 @@
+{% extends 'staff.html' %}
+
+{% block content %}
+  <h2>Prescribe Medicine</h2>
+  <form method="POST" action="{% url 'prescribe_medicine' casesheet_id=casesheet_id %}">
+    {% csrf_token %}
+    <label for="medicine_name">Medicine Name:</label>
+    <input type="text" id="medicine_name" name="medicine_name" required><br>
+    <label for="dosage">Dosage:</label>
+    <input type="text" id="dosage" name="dosage" required><br>
+    <label for="frequency">Frequency:</label>
+    <input type="text" id="frequency" name="frequency" required><br>
+    <input type="submit" value="Prescribe">
+  </form>
+{% endblock %}

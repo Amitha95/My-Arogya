@@ -1,0 +1,142 @@
+{% extends "staff.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    function fm2()
+    {document.f2.submit();}
+    function fm1(x)
+    {
+            document.f1.submit();
+      
+        }
+</script>
+
+<!--grid-->
+<div class="row">
+    <div class="col-md-12 bg-info">
+        <h3 class="text-primary">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <form method="post" name="f1" action="{% url 'op_history' %}">
+                <input type="hidden" name="t2" value="{{t2}}"/>
+                <div class="form-group">
+                    <label for="focusedinput" class="col-sm-2 ">Type </label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="t1" onchange="fm1(this.value)">
+                            <option value="">-select-</option>
+                            {% if t1 == "Ortho" %}
+                            <option selected="selected">Ortho</option>
+                            {% else %}
+                            <option>Ortho</option>
+                            {% endif %}
+                            {% if t1 == "General" %}
+                            <option selected="selected">General</option>
+                            {% else %}
+                            <option>General</option>
+                            {% endif %}
+                            {% if t1 == "Dental" %}
+                            <option selected="selected">Dental</option>
+                            {% else %}
+                            <option>Dental</option>
+                            {% endif %}
+                            {% if t1 == "ENT" %}
+                            <option selected="selected">ENT</option>
+                            {% else %}
+                            <option>ENT</option>
+                            {% endif %}
+                            {% if t1 == "Special" %}
+                            <option selected="selected">Special</option>
+                            {% else %}
+                            <option>Special</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                
+                </div>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <form method="post" name="f2" action="{% url 'op_history' %}">
+                <input type="hidden" name="t1" value="{{t1}}"/>
+                <div class="form-group">
+                    <label for="focusedinput" class="col-sm-2 ">Date</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" value="{{t2}}"  onchange="fm2()"  name="t2" id="focusedinput" placeholder="Staff Name">
+                    </div>
+                
+                </div>
+            </form>
+        </div>
+        </div>
+<div class="col-md-12 bg-info">
+ <h3 class="text-primary">Op History</h3>
+ <div class="col-md-1"></div>
+ <div class="col-md-10">
+
+    <table id="table table-responsive table-striped " width="100%" style="margin-bottom:10px;">
+        <thead class="bg-primary text-white">
+     <tr >
+                          <th style="  color:white;">Sl.No.</th>
+                        
+                          <th style="  color:white;" >Patient Details</th>
+                          <th style="  color:white;" >Op</th>
+                          <th style="  color:white;" >Booking date</th>
+                          <th style="  color:white;" >Op No</th>
+                          
+                        
+                      
+                          <th style="  color:white;" >Action</th>
+                        </tr>
+                        </thead>
+      
+      <tbody>
+         
+          {% for datas in data %}
+                              
+                              <tr>
+                              <td>{{ forloop.counter }}</td>
+                              
+                              <td><b>Name:-</b> {{ datas.User.User_name }}<br/>
+                                <b>address:-</b> {{ datas.User.User_address }}<br/>
+                                <b>phone:- </b>{{ datas.User.User_phone }},
+                                {{ datas.User.User_alt_No }}
+                            </td>
+                              <td>{{ datas.op_type }}</td>
+                              <td>{{ datas.op_date }}</td>
+                              <td>{{ datas.op_no }}</td>
+                              <td>
+                                {% if datas.op_status == "closed" %}
+                                <a href="{% url 'Case_report' %}?id={{datas.op_id}}"  style="margin:10px;" class="btn btn-info">View Report</a>
+                                {% else %}  
+                                {{ datas.op_status }}
+                            {% endif %}
+                            </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+
+
+</div>
+</div>
+
+</div>
+<style>
+    table th, table td {
+    padding: 9px 7px;
+    text-align: left;
+    }
+    table th
+    {
+        color:white;
+    }
+    </style>
+
+{% endblock %}
+

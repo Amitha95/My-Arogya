@@ -1,0 +1,37 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+  <h2>Rooms</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Room Number</th>
+        <th>Floor</th>
+        <th>Capacity</th>
+        <th>Availability</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for room in rooms %}
+        <tr>
+          <td>{{ room.room_number }}</td>
+          <td>{{ room.floor }}</td>
+          <td>{{ room.capacity }}</td>
+          <td>
+            {% if room.is_available %}
+              Available
+            {% else %}
+              Occupied
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'edit_room' room_id=room.id %}">Edit</a>
+            <a href="{% url 'delete_room' room_id=room.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'add_room' %}" class="btn btn-success">Add Room</a>
+{% endblock %}

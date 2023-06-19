@@ -1,0 +1,57 @@
+{% extends "staffhome.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Appointments Today</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Appointment Number</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for appointment in appointments %}
+    <tr>
+      <td>{{ appointment.op_no }}</td>
+      <td>{{ appointment.User.User_name }}</td>
+      <td>{{ appointment.op_date }}</td>
+      <td>{{ appointment.op_type }}</td>
+      <td>
+        {% if appointment.op_status == 'added' %}
+          Case Sheet Added
+        {% else %}
+          <a href="{% url 'add_casesheet' appointment.op_id %}" class="btn btn-primary">Add Case Sheet</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if casesheet %}
+<h4>Case Sheet Details</h4>
+<table class="table">
+  <tr>
+    <th>Symptoms</th>
+    <td>{{ casesheet.symptoms }}</td>
+  </tr>
+  <tr>
+    <th>Diagnosis</th>
+    <td>{{ casesheet.diagnosis }}</td>
+  </tr>
+  <tr>
+    <th>Treatment</th>
+    <td>{{ casesheet.treatment }}</td>
+  </tr>
+  <tr>
+    <th>Admit</th>
+    <td>{{ casesheet.admit }}</td>
+  </tr>
+</table>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,264 @@
+{% extends "admin.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<!--grid-->
+<div class="row">
+<div class="col-md-12 bg-info">
+ <h3 class="text-primary">Add Staff</h3>
+ <div class="col-md-1"></div>
+   <div class="col-md-10">
+    <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'Appoint_Staff' %}">
+        {% csrf_token %}
+  
+            <div class="tab-pane active" id="horizontal-form">
+                   
+                    <div class="form-group">
+                        <label for="focusedinput" class="col-sm-2 ">Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="t1" required id="focusedinput" placeholder="Staff Name">
+                        </div>
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="txtarea1" class="col-sm-2 ">Address</label>
+                        <div class="col-sm-8"><textarea name="t2" id="txtarea1" required cols="50" rows="4" class="form-control"placeholder="Staff Address"></textarea></div>
+                    </div>
+                    <div class="form-group">
+                <label class="col-md-2 ">Email Address</label>
+                <div class="col-md-8">
+                    <div class="input-group">							
+                        <span class="input-group-addon">
+                            <i class="fa fa-envelope-o"></i>
+                        </span>
+                        <input type="text" class="form-control" name="t3" required placeholder="Email Address" id="ema" onblur="auemailss();" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                        <label for="mediuminput" class="col-sm-2">Phone No</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" name="t4" id="phn" onblur="auphoness();" required id="mediuminput" placeholder="Phone Number">
+                        </div>
+                    </div>
+                <div class="form-group">
+                        <label for="selector1" class="col-sm-2 ">Designation</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="t5" required id="selector1" class="form-control">
+                        </div>
+                    </div>	
+                    <div class="form-group">
+                        <label for="checkbox" class="col-sm-2 ">Qualification</label>
+                        <div class="col-sm-8">
+                            <div class="checkbox-inline1"><label><input type="checkbox" name="t6" value="SSLC"> SSLC</label> &nbsp; 
+                                <label><input type="checkbox" name="t6" value="Plus two"> Plus Two</label> &nbsp; 
+                                <label><input type="checkbox" name="t6" value="UG"> UG</label> &nbsp; 
+                                <label><input type="checkbox" name="t6" value="PG"> PG</label></div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                        <label for="txtarea1" class="col-sm-2 " required>Experience</label>
+                        <div class="col-sm-8"><textarea name="t7" id="txtarea1" cols="50" rows="4" class="form-control" placeholder="Experience Details"></textarea></div>
+                    </div>
+                <div class="form-group">
+                        <label for="mediuminput" class="col-sm-2">Photo</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" name="t8" required id="mediuminput" placeholder="Medium Input">
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="mediuminput" class="col-sm-2 " required>User Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="t9" required id="mediuminput" placeholder="User Name">
+                        </div>
+                    </div>
+                
+                <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 ">Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" name="t10" required id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" name="t11" required id="logid" placeholder="LOG ID">
+                
+            </div>
+       
+        
+    
+
+<div class="" style="margin-bottom: 10px;">
+<div class="row">
+<!--<div class="col-sm-8 col-sm-offset-2">
+    <input type="submit" value="Submit" class="btn-primary btn"/>
+    
+    <input type="cancel" value="cancel" class="btn-info btn"/>
+    
+</div>-->
+<div class="col-sm-8 col-sm-offset-2" align="center">
+    <button class="btn-success btn" type="submit" name="submit">Appoint</button>
+    <input type="reset" value="Reset" class=" btn btn-warning"/>
+    
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+
+
+<style>
+table th, table td {
+padding: 9px 7px;
+text-align: left;
+}
+</style>
+
+
+<script>
+function getDateDiffInYears(date1, date2) {
+var dateParts1 = date1.split('-')
+, dateParts2 = date2.split('-')
+, d1 = new Date(dateParts1[0], dateParts1[1]-1, dateParts1[2])
+, d2 = new Date(dateParts2[0], dateParts2[1]-1, dateParts2[2])
+
+return new Date(d2 - d1).getYear() - new Date(0).getYear() + 1;
+}
+function formatDate(date) {
+var d = new Date(date),
+month = '' + (d.getMonth() + 1),
+day = '' + d.getDate(),
+year = d.getFullYear();
+
+if (month.length < 2) month = '0' + month;
+if (day.length < 2) day = '0' + day;
+
+return [year, month, day].join('-');
+}
+
+function ageCalculator()
+{
+var sendDate =document.getElementById("date2").value;
+var inputDate = new Date(sendDate);
+// Get today's date
+var todaysDate = new Date();
+var date1 = formatDate(inputDate);
+var date2 = formatDate(todaysDate);
+// call setHours to take the time out of the comparison
+if(inputDate.setHours(0,0,0,0) >= todaysDate.setHours(0,0,0,0)) {
+alert('The date of birth date should not be greater than or equal to today!');
+}
+var diff = getDateDiffInYears(date1,date2);
+if(diff<18)
+{
+alert("Your age should not be less than 18 years");
+$("#date2").val('');
+$("#date2").focus();
+}
+
+}
+function aunamess()
+{
+var x =document.getElementById("nam").value;
+var letters = /^[A-Z a-z ]+$/
+// Get today's date
+if(!x.match(letters))
+{
+ alert("Name should be Aphabet");
+$("#nam").val('');
+}
+
+}
+function usernamess()
+{
+var x =document.getElementById("usernam").value;
+var letters = /^[A-Z a-z ]+$/
+// Get today's date
+if(!x.match(letters))
+{
+ alert("Name should be Aphabet");
+$("#usernam").val('');
+}
+
+}
+function auphoness()
+{
+var x =document.getElementById("phn").value;
+var letters=/^\d{10}$/;
+if(!x.match(letters))
+{
+alert("please Add 10 Digit phone number");
+$("#phn").val('');
+}
+
+}
+function userphoness()
+{
+var x =document.getElementById("userphn").value;
+var letters=/^\d{10}$/;
+if(!x.match(letters))
+{
+alert("please Add 10 Digit phone number");
+$("#userphn").val('');
+}
+
+}
+function auemailss()
+{
+var x =document.getElementById("ema").value;
+var atpos=x.indexOf("@");
+var dotpos=x.lastIndexOf(".");
+if(atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+{
+alert("Not a valid e-mail address");
+$("#ema").val('');
+}
+
+}
+function usermailss()
+{
+var x =document.getElementById("userema").value;
+var atpos=x.indexOf("@");
+var dotpos=x.lastIndexOf(".");
+if(atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+{
+alert("Not a valid e-mail address");
+$("#userema").val('');
+}
+
+}
+function aupass()
+{
+var x =document.getElementById("autpass").value;
+
+// Get today's date
+if(x.length >8||x.length <8)
+{
+ alert("Password should be 8 Character in length");
+$("#autpass").val('');
+}
+
+}
+function usspass()
+{
+var x =document.getElementById("uspass").value;
+
+// Get today's date
+if(x.length >8||x.length <8)
+{
+ alert("Password should be 8 Character in length");
+$("#uspass").val('');
+}
+
+}
+</script>
+
+
+
+
+
+{% endblock %}
