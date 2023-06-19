@@ -421,7 +421,6 @@ def edit_room(request, room_id):
     return render(request, 'edit_room.html', {'room': room, 'room_id': room_id})
 
 
-
 def delete_room(request, room_id):
     room = Room.objects.get(pk=room_id)
     room.delete()
